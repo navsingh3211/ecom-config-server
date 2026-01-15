@@ -1,15 +1,32 @@
 spring:
   application:
     name: ecomconfigserver
+  profiles:
+    active: native
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
   cloud:
     config:
       server:
-        git:
-          #          uri: https://github.com/navsingh3211/cxp-config
-          uri: file:/usr/local/src/myWork/MicroServices/cxp-config
-    #          username: ${GIT_USER}
-    #          password: ${GIT_TOKEN}
+        native:
+          search-locations: file:/usr/local/src/myWork/MicroServices/cxp-config/
+#  cloud:
+#    config:
+#      server:
+#        git:
+#          uri: https://github.com/navsingh3211/cxp-config
+#          username: ${GIT_USER}
+#          password: ${GIT_TOKEN}
 
 
 server:
   port: 8889
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,refresh,busrefresh
